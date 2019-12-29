@@ -4,6 +4,10 @@ import axios from 'axios'
 import {Link} from 'react-router-dom'
 import ReactMapboxGl, { Layer, Feature, Popup, Marker } from 'react-mapbox-gl'
 
+import Sidebar from '../main/Sidebar'
+
+
+
 const Map = ReactMapboxGl({
   accessToken:
     process.env.mapboxPublicToken
@@ -35,25 +39,30 @@ class Main extends React.Component{
 
     return (
       <div className='container'>
-
-        <Map
-          style="mapbox://styles/mapbox/streets-v9"
-          containerStyle={{
-            height: '100vh',
-            width: '100vw'
-          }}
-        >
-          <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
-            <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />
-          </Layer>
-          <Popup coordinates={[-0.481747846041145, 51.3233379650232]}>
-          HIYa
-          </Popup>
-        </Map>
+        <div className='columns'>
+          <div className='column is-one-third'>
+          <Sidebar />
+          </div>
+          <div className='column'>
+            <Map className='map'
+              style="mapbox://styles/mapbox/streets-v9"
+              containerStyle={{
+                height: '80vh',
+                width: '100vh'
+              }}
+            >
+              <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
+                <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />
+              </Layer>
+              <Popup coordinates={[-0.481747846041145, 51.3233379650232]}>
+              HIYa
+              </Popup>
+            </Map>
+          </div>
+        </div>
 
 
       </div>
-
 
 
 

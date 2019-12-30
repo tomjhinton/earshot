@@ -14,16 +14,6 @@ const Map = ReactMapboxGl({
 })
 
 
-let clean = sanitizeHtml('<p><iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/735426004&color=%23ff9900&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><p>', {
-  allowedTags: [ 'p', 'em', 'strong', 'iframe' ],
-  allowedClasses: {
-    'p': [ 'fancy', 'simple' ],
-  },
-  allowedAttributes: {
-    'iframe': ['src']
-  },
-  allowedIframeHostnames: ['w.soundcloud.com', 'player.vimeo.com']
-})
 
 class Sidbear extends React.Component{
   constructor(){
@@ -35,6 +25,20 @@ class Sidbear extends React.Component{
     }
     this.componentDidMount = this.componentDidMount.bind(this)
   }
+
+
+  sanitize(input){
+  return sanitizeHtml(input, {
+    allowedTags: [ 'p', 'em', 'strong', 'iframe' ],
+    allowedClasses: {
+      'p': [ 'fancy', 'simple' ],
+    },
+    allowedAttributes: {
+      'iframe': ['src']
+    },
+    allowedIframeHostnames: ['w.soundcloud.com', 'player.vimeo.com']
+  })
+}
 
 
   componentDidMount(){
@@ -59,7 +63,7 @@ class Sidbear extends React.Component{
           <div className='column is-half'>
           COL 1
 
-            <div dangerouslySetInnerHTML={this.createMarkup(clean)} />
+            <div dangerouslySetInnerHTML={this.createMarkup(this.sanitize('<p><iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/735426004&color=%23ff9900&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><p>'))} />
           </div>
           <div className='column'>
             COL 2

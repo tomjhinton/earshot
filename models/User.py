@@ -12,6 +12,7 @@ class User(db.Entity):
     username = Required(str, unique=True)
     email = Required(str, unique=True)
     password_hash = Required(str)
+    sounds = Set('Sound')
 
 
     def is_password_valid(self, plaintext):
@@ -44,6 +45,7 @@ class UserSchema(Schema):
     email = fields.Str(required=True)
     password = fields.Str(load_only=True)
     password_confirmation = fields.Str(load_only=True)
+    sounds = fields.Nested('SoundSchema', many=True, exclude=('user',))
 
 
 

@@ -2,43 +2,44 @@
 import React from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
-import ReactMapboxGl, { Layer, Feature, Popup, Marker } from 'react-mapbox-gl'
+import Auth from '../../lib/Auth'
+import Flash from '../../lib/Flash'
 
-var sanitizeHtml = require('sanitize-html');
-
-
-
-const Map = ReactMapboxGl({
-  accessToken:
-    process.env.mapboxPublicToken
-})
+const sanitizeHtml = require('sanitize-html')
 
 
 
-class Sidbear extends React.Component{
-  constructor(){
-    super()
+
+
+
+class Sidebar extends React.Component{
+  constructor(props){
+    super(props)
     this.state = {
       data: {},
-      error: ''
+      error: '',
+      user: ''
 
     }
     this.componentDidMount = this.componentDidMount.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
+    this.logout = this.logout.bind(this)
   }
 
 
   sanitize(input){
-  return sanitizeHtml(input, {
-    allowedTags: [ 'p', 'em', 'strong', 'iframe' ],
-    allowedClasses: {
-      'p': [ 'fancy', 'simple' ],
-    },
-    allowedAttributes: {
-      'iframe': ['src']
-    },
-    allowedIframeHostnames: ['w.soundcloud.com', 'player.vimeo.com']
-  })
-}
+    return sanitizeHtml(input, {
+      allowedTags: [ 'p', 'em', 'strong', 'iframe' ],
+      allowedClasses: {
+        'p': [ 'fancy', 'simple' ]
+      },
+      allowedAttributes: {
+        'iframe': ['src']
+      },
+      allowedIframeHostnames: ['w.soundcloud.com', 'player.vimeo.com']
+    })
+  }
 
 
   componentDidMount(){
@@ -48,10 +49,41 @@ class Sidbear extends React.Component{
 
   }
 
-   createMarkup(embed) {
-     console.log(embed)
-  return {__html: embed}
-}
+  createMarkup(embed) {
+    console.log(embed)
+    return {__html: embed}
+  }
+
+  logout() {
+    Auth.removeToken()
+    this.setState({ user: '' })
+    this.props.history.push('/')
+
+  }
+
+
+  handleChange(e) {
+  // merge data on state with new data from the form
+    const data = { ...this.state.data, [e.target.name]: e.target.value }
+    // set the data back on state
+    this.setState({ data }) // equivalent to { data: data }
+  }
+
+  handleLoginSubmit(e) {
+    e.preventDefault()
+
+    axios.post('/api/login', this.state.data)
+      .then(res => {
+        Auth.setToken(res.data.token)
+        Flash.setMessage('success', res.data.message)
+        this.props.history.push({
+          pathname: '/',
+          state: { detail: [Auth.getPayload()] }
+        })
+      })
+      .catch(() => this.setState({ error: 'Invalid credentials' }))
+  }
+
 
   render() {
 
@@ -63,7 +95,45 @@ class Sidbear extends React.Component{
           <div className='column is-half'>
           COL 1
 
-            <div dangerouslySetInnerHTML={this.createMarkup(this.sanitize('<p><iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/735426004&color=%23ff9900&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><p>'))} />
+            {!Auth.isAuthenticated() && <div>
+              <span>LOGIN</span>
+              <div className='container'>
+
+                <div className="title section form-title">Login</div>
+                <div className="user-form">
+                  <form onSubmit={this.handleLoginSubmit}>
+                    <div className="field">
+                      <label className="label">Email</label>
+                      <input
+                        className="input"
+                        name="email"
+                        placeholder="eg: jack@hotmail.com"
+                        onChange={this.handleChange}
+
+                      />
+                    </div>
+                    <div className="field">
+                      <label className="label">Password</label>
+                      <div className="control">
+                        <input
+                          className="input"
+                          name="password"
+                          type="password"
+                          placeholder="eg: ••••••••"
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                      {this.state.error && <div className="help is-danger">{this.state.error}</div>}
+                    </div>
+                    <button>Submit</button>
+                  </form>
+                </div>
+              </div>
+
+            </div>}
+            {Auth.isAuthenticated() && <div onClick={this.logout}>
+              LOGOUT
+            </div>}
           </div>
           <div className='column'>
             COL 2
@@ -78,4 +148,4 @@ class Sidbear extends React.Component{
     )
   }
 }
-export default Sidbear
+export default Sidebar

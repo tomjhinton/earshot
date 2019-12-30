@@ -7,18 +7,24 @@ from datetime import datetime, timedelta
 
 
 class Sound(db.Entity):
-    artist = Required(str)
     title = Required(str)
     cover = Optional(str)
-    description = Required(str)
+    description = Optional(str)
     embed = Optional(str)
+    url = Optional(str)
+    createdBy = Required('User')
+    long = Required(float)
+    lat = Required(float)
 
 
 
 class SoundSchema(Schema):
     id = fields.Int(dump_only=True)
-    artist = fields.Str(required=True)
     title = fields.Str()
     cover = fields.Str()
     embed = fields.Str()
-    description = fields.Str(required=True)
+    url = fields.Str()
+    description = fields.Str()
+    long = fields.Float()
+    lat = fields.Float()
+    createdBy = fields.Nested('UserSchema', exclude=('sounds', 'email'), dump_only=True)

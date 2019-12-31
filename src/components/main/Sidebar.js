@@ -77,7 +77,22 @@ class Sidebar extends React.Component{
         Auth.setToken(res.data.token)
         Flash.setMessage('success', res.data.message)
         this.props.history.push({
-          pathname: '/',
+          pathname: '/hiya',
+          state: { detail: [Auth.getPayload()] }
+        })
+      })
+      .catch(() => this.setState({ error: 'Invalid credentials' }))
+  }
+
+  handleSoundSubmit(e) {
+    e.preventDefault()
+
+    axios.post('/api/sounds', this.state.data)
+      .then(res => {
+        Auth.setToken(res.data.token)
+        Flash.setMessage('success', res.data.message)
+        this.props.history.push({
+          pathname: '/hiya',
           state: { detail: [Auth.getPayload()] }
         })
       })
@@ -109,9 +124,9 @@ class Sidebar extends React.Component{
                         name="email"
                         placeholder="eg: jack@hotmail.com"
                         onChange={this.handleChange}
-
                       />
                     </div>
+
                     <div className="field">
                       <label className="label">Password</label>
                       <div className="control">
@@ -125,14 +140,100 @@ class Sidebar extends React.Component{
                       </div>
                       {this.state.error && <div className="help is-danger">{this.state.error}</div>}
                     </div>
+
+
+
                     <button>Submit</button>
                   </form>
                 </div>
               </div>
 
             </div>}
-            {Auth.isAuthenticated() && <div onClick={this.logout}>
-              LOGOUT
+            {Auth.isAuthenticated() && <div >
+              <p onClick={this.logout}>LOGOUT</p>
+
+              <span>Add Sound</span>
+              <div className='container'>
+
+                <div className="title section form-title">Add Sound</div>
+                <div className="user-form">
+                  <form onSubmit={this.handleSoundSubmit}>
+                    <div className="field">
+                      <label className="label">Email</label>
+                      <input
+                        className="input"
+                        name="email"
+                        placeholder="eg: jack@hotmail.com"
+                        onChange={this.handleChange}
+
+                      />
+                    </div>
+
+                    <div className="field">
+                      <label className="label">Password</label>
+                      <div className="control">
+                        <input
+                          className="input"
+                          name="password"
+                          type="password"
+                          placeholder="eg: ••••••••"
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                      {this.state.error && <div className="help is-danger">{this.state.error}</div>}
+                    </div>
+
+                    <div className="field">
+                      <label className="label">Password</label>
+                      <div className="control">
+                        <input
+                          className="input"
+                          name="password"
+                          type="password"
+                          placeholder="eg: ••••••••"
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                      {this.state.error && <div className="help is-danger">{this.state.error}</div>}
+                    </div>
+
+                    <div className="field">
+                      <label className="label">Password</label>
+                      <div className="control">
+                        <input
+                          className="input"
+                          name="password"
+                          type="password"
+                          placeholder="eg: ••••••••"
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                      {this.state.error && <div className="help is-danger">{this.state.error}</div>}
+                    </div>
+
+                    <div className="field">
+                      <label className="label">Password</label>
+                      <div className="control">
+                        <input
+                          className="input"
+                          name="password"
+                          type="password"
+                          placeholder="eg: ••••••••"
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                      {this.state.error && <div className="help is-danger">{this.state.error}</div>}
+                    </div>
+
+
+
+                    <button>Submit</button>
+                  </form>
+                </div>
+              </div>
+
+
+
             </div>}
           </div>
           <div className='column'>

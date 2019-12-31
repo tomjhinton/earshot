@@ -12,9 +12,9 @@ class Sound(db.Entity):
     description = Optional(str)
     embed = Optional(str)
     url = Optional(str)
-    createdBy = Required('User')
     long = Required(float)
     lat = Required(float)
+    createdBy = Required('User')
 
 
 

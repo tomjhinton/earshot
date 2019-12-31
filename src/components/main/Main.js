@@ -3,6 +3,7 @@ import React from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 import ReactMapboxGl, { Layer, Feature, Popup, Marker } from 'react-mapbox-gl'
+import Auth from '../../lib/Auth'
 
 import Sidebar from '../main/Sidebar'
 
@@ -27,8 +28,10 @@ class Main extends React.Component{
 
 
   componentDidMount(){
+    if(Auth.isAuthenticated){
     // axios.get('/api/records')
     //   .then(res => this.setState({ records: res.data }))
+  }
 
 
   }
@@ -41,7 +44,7 @@ class Main extends React.Component{
       <div className='container'>
         <div className='columns'>
           <div className='column is-one-third'>
-          <Sidebar />
+            <Sidebar />
           </div>
           <div className='column'>
             <Map className='map'
@@ -54,8 +57,8 @@ class Main extends React.Component{
               <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
                 <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />
               </Layer>
-              <Popup coordinates={[-0.481747846041145, 51.3233379650232]}>
-              HIYa
+              <Popup coordinates={[-0.099352,  51.507905]}>
+              Tate?
               </Popup>
             </Map>
           </div>

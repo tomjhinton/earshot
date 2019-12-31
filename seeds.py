@@ -27,8 +27,8 @@ with db_session():
         description = '',
         embed = '<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/735425458&color=%230066cc&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>',
         url = '',
-        long = 0.0,
-        lat = 0.0,
+        long =  51.507905,
+        lat = -0.099352,
         createdBy=createdBy
     )
 
@@ -58,7 +58,7 @@ with db_session():
     Sound(
         title = 'Turin Bells',
         cover = '',
-        description = '',
+        description='',
         embed = '<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/735420739&color=%230066cc&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>',
         url = '',
         long = 0.0,

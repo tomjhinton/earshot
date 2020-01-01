@@ -45,7 +45,7 @@ class UserSchema(Schema):
     email = fields.Str(required=True)
     password = fields.Str(load_only=True)
     password_confirmation = fields.Str(load_only=True)
-    sounds = fields.Nested('SoundSchema', many=True, exclude=('user',))
+    sounds = fields.Nested('SoundSchema', many=True, exclude=('createdBy',))
 
 
 
@@ -64,7 +64,7 @@ class UserSchema(Schema):
 
 
     @validates_schema
-    def validate_username(self, data):
+    def validate_username(self, data, **kwargs):
         user = User.get(username=data.get('username'))
 
         if user:
@@ -75,7 +75,7 @@ class UserSchema(Schema):
 
 
     @validates_schema
-    def validate_email(self, data):
+    def validate_email(self, data, **kwargs):
         user = User.get(email=data.get('email'))
 
         if user:
@@ -87,7 +87,7 @@ class UserSchema(Schema):
 
     # logic to perform AFTER validation but before save, to modify the data
     @post_load
-    def hash_password(self, data):
+    def hash_password(self, data, **kwargs):
         if data['password']:
             data['password_hash'] = self.generate_hash(data['password'])
 

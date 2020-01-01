@@ -1,13 +1,13 @@
 import os
 from app import app
-from controllers import  users, sounds, submissions
+from controllers import  users, sounds, auth
 
 
 app.register_blueprint(users.router, url_prefix='/api')
 
 app.register_blueprint(sounds.router, url_prefix='/api')
 
-app.register_blueprint(submissions.router, url_prefix='/api')
+app.register_blueprint(auth.router, url_prefix='/api')
 
 
 

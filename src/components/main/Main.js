@@ -7,6 +7,7 @@ import Auth from '../../lib/Auth'
 
 import Sidebar from '../main/Sidebar'
 
+const user = Auth.getPayload()
 
 
 const Map = ReactMapboxGl({
@@ -29,8 +30,9 @@ class Main extends React.Component{
 
   componentDidMount(){
     if(Auth.isAuthenticated){
-    // axios.get('/api/records')
-    //   .then(res => this.setState({ records: res.data }))
+      axios.get(`/api/users/${user.sub}`)
+        .then(res => this.setState({user: res.data}))
+        console.log(this.state)
   }
 
 
@@ -57,9 +59,16 @@ class Main extends React.Component{
               <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
                 <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />
               </Layer>
-              <Popup coordinates={[-0.099352,  51.507905]}>
+              {this.state.user && this.state.user.sounds.map(x=> {
+                return(
+                  <Popup coordinates={[x.long,  x.lat]} key={x.id}>
+                    {x.title}
+                  </Popup>
+                )
+              })}
+
               Tate?
-              </Popup>
+
             </Map>
           </div>
         </div>

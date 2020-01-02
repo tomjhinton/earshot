@@ -27,8 +27,8 @@ with db_session():
         description = '',
         embed = '<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/735425458&color=%230066cc&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>',
         url = '',
-        long =  51.507905,
-        lat = -0.099352,
+        long = -0.099352,
+        lat =  51.507905,
         createdBy=createdBy
     )
 
@@ -39,8 +39,8 @@ with db_session():
         description = '',
         embed='<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/735426004&color=%230066cc&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>',
         url = '',
-        long = 0.0,
-        lat = 0.0,
+        long = 0.998430,
+        lat = 52.079290,
         createdBy=createdBy
         )
 
@@ -50,8 +50,8 @@ with db_session():
         description = '',
         embed = '<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/735422386&color=%230066cc&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>',
         url = '',
-        long = 0.0,
-        lat = 0.0,
+        long = -0.019179,
+        lat = 51.483575,
         createdBy=createdBy
     )
 
@@ -61,8 +61,8 @@ with db_session():
         description='',
         embed = '<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/735420739&color=%230066cc&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>',
         url = '',
-        long = 0.0,
-        lat = 0.0,
+        long = 7.683070,
+        lat = 45.068371,
         createdBy=createdBy
     )
 

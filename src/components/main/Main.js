@@ -4,6 +4,7 @@ import axios from 'axios'
 import {Link} from 'react-router-dom'
 import ReactMapboxGl, { Layer, Feature, Popup, Marker } from 'react-mapbox-gl'
 import Auth from '../../lib/Auth'
+const sanitizeHtml = require('sanitize-html')
 
 import Sidebar from '../main/Sidebar'
 
@@ -38,6 +39,24 @@ class Main extends React.Component{
 
   }
 
+  sanitize(input){
+    return sanitizeHtml(input, {
+      allowedTags: [ 'p', 'em', 'strong', 'iframe' ],
+      allowedClasses: {
+        'p': [ 'fancy', 'simple' ]
+      },
+      allowedAttributes: {
+        'iframe': ['src']
+      },
+      allowedIframeHostnames: ['w.soundcloud.com', 'player.vimeo.com']
+    })
+  }
+
+  createMarkup(embed) {
+    console.log(embed)
+    return {__html: embed}
+  }
+
   render() {
 
     console.log(this.state)
@@ -63,6 +82,7 @@ class Main extends React.Component{
                 return(
                   <Popup coordinates={[x.long,  x.lat]} key={x.id}>
                     {x.title}
+                    <div dangerouslySetInnerHTML={this.createMarkup(this.sanitize(x.embed))} />
                   </Popup>
                 )
               })}

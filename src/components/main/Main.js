@@ -28,6 +28,7 @@ class Main extends React.Component{
     }
     this.componentDidMount = this.componentDidMount.bind(this)
     this.getLongLat = this.getLongLat.bind(this)
+    this.newSoundPos = this.newSoundPos.bind(this)
   }
 
 
@@ -70,6 +71,10 @@ class Main extends React.Component{
   // JSON.stringify(e.lngLat.wrap())
   }
 
+  newSoundPos(map, e){
+    this.setState({new: e.lngLat})
+    console.log(this.state)
+      }
 
   render() {
 
@@ -79,7 +84,7 @@ class Main extends React.Component{
       <div className='container'>
         <div className='columns'>
           <div className='column is-one-third'>
-            <Sidebar />
+            <Sidebar {...this.state} />
           </div>
           <div className='column'>
             <div id='info'> </div>
@@ -91,20 +96,24 @@ class Main extends React.Component{
 
               }}
               onMouseMove={this.getLongLat}
+              onClick={this.newSoundPos}
             >
               <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
                 <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />
               </Layer>
               {this.state.user && this.state.user.sounds.map(x=> {
                 return(
-                  <Popup coordinates={[x.long,  x.lat]} key={x.id}>
+                  <Popup coordinates={[x.long,  x.lat]} key={x.id} className='Popup'>
                     {x.title}
-                    <div dangerouslySetInnerHTML={this.createMarkup(this.sanitize(x.embed))} />
+                    <div className='details' dangerouslySetInnerHTML={this.createMarkup(this.sanitize(x.embed))} />
                   </Popup>
                 )
               })}
 
-              Tate?
+              {this.state.new &&<Popup coordinates={[this.state.new.lng, this.state.new.lat]}>
+              <div> New Sound</div>
+              </Popup>
+            }
 
             </Map>
           </div>

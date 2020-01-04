@@ -50,7 +50,7 @@ class Sidebar extends React.Component{
   }
 
   createMarkup(embed) {
-    console.log(embed)
+
     return {__html: embed}
   }
 
@@ -103,6 +103,7 @@ class Sidebar extends React.Component{
   render() {
 
     console.log(this.state)
+    console.log(this.props)
 
     return (
       <div className='container'>

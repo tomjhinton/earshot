@@ -17,6 +17,7 @@ const Map = ReactMapboxGl({
 })
 
 
+
 class Main extends React.Component{
   constructor(){
     super()
@@ -26,6 +27,7 @@ class Main extends React.Component{
 
     }
     this.componentDidMount = this.componentDidMount.bind(this)
+    this.getLongLat = this.getLongLat.bind(this)
   }
 
 
@@ -57,6 +59,18 @@ class Main extends React.Component{
     return {__html: embed}
   }
 
+  getLongLat(map, e){
+    console.log(e.lngLat)
+    document.getElementById('info').innerHTML = e.lngLat
+  // e.point is the x, y coordinates of the mousemove event relative
+  // to the top-left corner of the map
+  // JSON.stringify(e.point) +
+  // '<br />' +
+  // // e.lngLat is the longitude, latitude geographical position of the event
+  // JSON.stringify(e.lngLat.wrap())
+  }
+
+
   render() {
 
     console.log(this.state)
@@ -68,12 +82,15 @@ class Main extends React.Component{
             <Sidebar />
           </div>
           <div className='column'>
+            <div id='info'> </div>
             <Map className='map'
               style="mapbox://styles/mapbox/streets-v9"
               containerStyle={{
                 height: '80vh',
                 width: '100vh'
+
               }}
+              onMouseMove={this.getLongLat}
             >
               <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
                 <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />

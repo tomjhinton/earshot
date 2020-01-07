@@ -163,8 +163,8 @@ class Sidebar extends React.Component{
                       <label className="label">Email</label>
                       <input
                         className="input"
-                        name="email"
-                        placeholder="eg: jack@hotmail.com"
+                        name="title"
+                        placeholder="Name that sound"
                         onChange={this.handleChange}
 
                       />
@@ -175,9 +175,8 @@ class Sidebar extends React.Component{
                       <div className="control">
                         <input
                           className="input"
-                          name="password"
-                          type="password"
-                          placeholder="eg: ••••••••"
+                          name="cover"
+                          placeholder="Picture URL"
                           onChange={this.handleChange}
                         />
                       </div>
@@ -189,9 +188,8 @@ class Sidebar extends React.Component{
                       <div className="control">
                         <input
                           className="input"
-                          name="password"
-                          type="password"
-                          placeholder="eg: ••••••••"
+                          name="embed"
+                          placeholder="Soundcloud Embed Code"
                           onChange={this.handleChange}
                         />
                       </div>
@@ -203,9 +201,8 @@ class Sidebar extends React.Component{
                       <div className="control">
                         <input
                           className="input"
-                          name="password"
-                          type="password"
-                          placeholder="eg: ••••••••"
+                          name="url"
+                          placeholder="Link if not hosted on soundcloud."
                           onChange={this.handleChange}
                         />
                       </div>
@@ -216,10 +213,9 @@ class Sidebar extends React.Component{
                       <label className="label">Password</label>
                       <div className="control">
                         <input
-                          className="input"
-                          name="password"
-                          type="password"
-                          placeholder="eg: ••••••••"
+                          className="textarea"
+                          name="description"
+                          placeholder="Description"
                           onChange={this.handleChange}
                         />
                       </div>

@@ -29,3 +29,8 @@
 .mapboxgl-popup-content{
   background-color: blue;
 }
+
+form{
+  height: calc(75vh - 200px);
+  overflow-y: auto;
+}

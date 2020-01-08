@@ -25,6 +25,8 @@ class Sidebar extends React.Component{
     this.handleChange = this.handleChange.bind(this)
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
     this.logout = this.logout.bind(this)
+    this.handleSoundSubmit = this.handleSoundSubmit.bind(this)
+
   }
 
 
@@ -49,6 +51,20 @@ class Sidebar extends React.Component{
 
   }
 
+  componentDidUpdate(prevProps){
+    if(this.props !== prevProps && this.props.new){
+      console.log('hiya')
+      const data = { ...this.state.data, long: this.props.new.lng, lat: this.props.new.lng }
+      this.setState({data})
+    }
+    // axios.get('/api/records')
+    //   .then(res => this.setState({ records: res.data }))
+
+
+  }
+
+
+
   createMarkup(embed) {
 
     return {__html: embed}
@@ -67,6 +83,7 @@ class Sidebar extends React.Component{
     const data = { ...this.state.data, [e.target.name]: e.target.value }
     // set the data back on state
     this.setState({ data }) // equivalent to { data: data }
+    console.log(this.state)
   }
 
   handleLoginSubmit(e) {

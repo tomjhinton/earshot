@@ -18,7 +18,6 @@ def index():
 
 @router.route('/sounds', methods=['POST'])
 @db_session
-@secure_route
 def create():
     schema = SoundSchema()
 

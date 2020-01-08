@@ -62,7 +62,7 @@ class Main extends React.Component{
 
   getLongLat(map, e){
     console.log(e.lngLat)
-    document.getElementById('info').innerHTML = e.lngLat
+  //  document.getElementById('info').innerHTML = e.lngLat
   // e.point is the x, y coordinates of the mousemove event relative
   // to the top-left corner of the map
   // JSON.stringify(e.point) +
@@ -74,7 +74,7 @@ class Main extends React.Component{
   newSoundPos(map, e){
     this.setState({new: e.lngLat})
     console.log(this.state)
-      }
+  }
 
   render() {
 
@@ -87,7 +87,7 @@ class Main extends React.Component{
             <Sidebar {...this.state} />
           </div>
           <div className='column'>
-            <div id='info'> </div>
+            <div className='title'> EARSHOT</div>
             <Map className='map'
               style="mapbox://styles/mapbox/streets-v9"
               containerStyle={{

@@ -107,15 +107,15 @@ class Sidebar extends React.Component{
 
     return (
       <div className='container'>
-        <div className='columns'>
+        <div className='columns sidebar'>
           <div className='column is-half'>
-          COL 1
+
 
             {!Auth.isAuthenticated() && <div>
               <span>LOGIN</span>
               <div className='container'>
 
-                <div className="title section form-title">Login</div>
+                <div className="section form-title">Login</div>
                 <div className="user-form">
                   <form onSubmit={this.handleLoginSubmit}>
                     <div className="field">
@@ -160,7 +160,7 @@ class Sidebar extends React.Component{
                 <div className="user-form">
                   <form onSubmit={this.handleSoundSubmit}>
                     <div className="field">
-                      <label className="label">Email</label>
+                      <label className="label">Give the sound a title.</label>
                       <input
                         className="input"
                         name="title"
@@ -171,7 +171,7 @@ class Sidebar extends React.Component{
                     </div>
 
                     <div className="field">
-                      <label className="label">Password</label>
+                      <label className="label">Include a picture?</label>
                       <div className="control">
                         <input
                           className="input"
@@ -184,10 +184,10 @@ class Sidebar extends React.Component{
                     </div>
 
                     <div className="field">
-                      <label className="label">Password</label>
+                      <label className="label">If youre hosting on Soundcloud, add embed code here.</label>
                       <div className="control">
                         <input
-                          className="input"
+                          className="textarea"
                           name="embed"
                           placeholder="Soundcloud Embed Code"
                           onChange={this.handleChange}
@@ -197,7 +197,7 @@ class Sidebar extends React.Component{
                     </div>
 
                     <div className="field">
-                      <label className="label">Password</label>
+                      <label className="label">A link to the audio if its not on soundcloud.</label>
                       <div className="control">
                         <input
                           className="input"
@@ -210,7 +210,7 @@ class Sidebar extends React.Component{
                     </div>
 
                     <div className="field">
-                      <label className="label">Password</label>
+                      <label className="label">Add a description?</label>
                       <div className="control">
                         <input
                           className="textarea"
@@ -234,7 +234,7 @@ class Sidebar extends React.Component{
             </div>}
           </div>
           <div className='column'>
-            COL 2
+
           </div>
         </div>
 

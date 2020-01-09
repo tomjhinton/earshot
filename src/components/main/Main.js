@@ -33,7 +33,7 @@ class Main extends React.Component{
 
 
   componentDidMount(){
-    if(Auth.isAuthenticated){
+    if(Auth.isAuthenticated()){
       axios.get(`/api/users/${user.sub}`)
         .then(res => this.setState({user: res.data}))
         console.log(this.state)

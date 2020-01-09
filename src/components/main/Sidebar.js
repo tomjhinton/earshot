@@ -26,6 +26,7 @@ class Sidebar extends React.Component{
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
     this.logout = this.logout.bind(this)
     this.handleSoundSubmit = this.handleSoundSubmit.bind(this)
+    this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this)
 
   }
 
@@ -54,7 +55,7 @@ class Sidebar extends React.Component{
   componentDidUpdate(prevProps){
     if(this.props !== prevProps && this.props.new){
       console.log('hiya')
-      const data = { ...this.state.data, long: this.props.new.lng, lat: this.props.new.lng }
+      const data = { ...this.state.data, long: this.props.new.lng, lat: this.props.new.lng, createdBy: this.props.user }
       this.setState({data})
     }
     // axios.get('/api/records')
@@ -94,7 +95,7 @@ class Sidebar extends React.Component{
         Auth.setToken(res.data.token)
         Flash.setMessage('success', res.data.message)
         this.props.history.push({
-          pathname: '/hiya',
+          pathname: '/',
           state: { detail: [Auth.getPayload()] }
         })
       })
@@ -114,6 +115,20 @@ class Sidebar extends React.Component{
         })
       })
       .catch(() => this.setState({ error: 'Invalid credentials' }))
+  }
+
+  handleRegisterSubmit(e) {
+    console.log('test')
+    e.preventDefault()
+
+    this.setState({ errors: '' })
+    console.log(this.state.data)
+    axios.post('/api/register', this.state.data)
+      // redirect the user to the login page...
+      .catch(err => {
+        console.log(err)
+        this.setState({ errors: err.response.data.error })
+      })
   }
 
 
@@ -151,6 +166,69 @@ class Sidebar extends React.Component{
                         <input
                           className="input"
                           name="password"
+                          type="password"
+                          placeholder="eg: ••••••••"
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                      {this.state.error && <div className="help is-danger">{this.state.error}</div>}
+                    </div>
+
+
+
+                    <button>Submit</button>
+                  </form>
+                </div>
+              </div>
+
+              <span>Register</span>
+              <div className='container'>
+
+                <div className="section form-title">Register</div>
+                <div className="user-form">
+                  <form onSubmit={this.handleRegisterSubmit}>
+
+                    <div className="field">
+                      <label className="label">Username</label>
+                      <input
+                        className="input"
+                        name="username"
+                        placeholder="eg: Westerkamp"
+                        onChange={this.handleChange}
+                      />
+                    </div>
+
+
+                    <div className="field">
+                      <label className="label">Email</label>
+                      <input
+                        className="input"
+                        name="email"
+                        placeholder="eg: jack@hotmail.com"
+                        onChange={this.handleChange}
+                      />
+                    </div>
+
+                    <div className="field">
+                      <label className="label">Password</label>
+                      <div className="control">
+                        <input
+                          className="input"
+                          name="password"
+                          type="password"
+                          placeholder="eg: ••••••••"
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                      {this.state.error && <div className="help is-danger">{this.state.error}</div>}
+                    </div>
+
+                    <div className="field">
+                      <label className="label">Password Confirmation</label>
+                      <div className="control">
+                        <input
+                          className="input"
+                          name="password_confirmation"
                           type="password"
                           placeholder="eg: ••••••••"
                           onChange={this.handleChange}

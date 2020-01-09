@@ -55,7 +55,7 @@ class UserSchema(Schema):
 
     # validate schema allows for custom error messages
     @validates_schema
-    def check_passwords(self, data):
+    def check_passwords(self, data, **kwargs):
         if data['password'] and data['password'] != data['password_confirmation']:
             raise ValidationError(
                 field_name='password_confirmation',

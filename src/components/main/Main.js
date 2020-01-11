@@ -8,7 +8,7 @@ const sanitizeHtml = require('sanitize-html')
 
 import Sidebar from '../main/Sidebar'
 
-const user = Auth.getPayload()
+let user = Auth.getPayload()
 
 
 const Map = ReactMapboxGl({
@@ -33,7 +33,9 @@ class Main extends React.Component{
 
 
   componentDidMount(){
-    if(Auth.isAuthenticated()){
+    user = Auth.getPayload()
+    console.log(user)
+    if(user){
       axios.get(`/api/users/${user.sub}`)
         .then(res => this.setState({user: res.data}))
         console.log(this.state)

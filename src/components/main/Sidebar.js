@@ -55,7 +55,7 @@ class Sidebar extends React.Component{
   componentDidUpdate(prevProps){
     if(this.props !== prevProps && this.props.new){
       console.log('hiya')
-      const data = { ...this.state.data, long: this.props.new.lng, lat: this.props.new.lng}
+      const data = { ...this.state.data, long: this.props.new.lng, lat: this.props.new.lat}
       this.setState({data})
     }
     // axios.get('/api/records')

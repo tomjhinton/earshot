@@ -27,4 +27,4 @@ class SoundSchema(Schema):
     description = fields.Str()
     long = fields.Float()
     lat = fields.Float()
-    createdBy = fields.Nested('UserSchema', exclude=('sounds', 'email'), dump_only=True)
+    createdBy = fields.Nested('UserSchema', exclude=('sounds', 'email', 'username'), dump_only=True)

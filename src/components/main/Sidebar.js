@@ -55,7 +55,7 @@ class Sidebar extends React.Component{
   componentDidUpdate(prevProps){
     if(this.props !== prevProps && this.props.new){
       console.log('hiya')
-      const data = { ...this.state.data, long: this.props.new.lng, lat: this.props.new.lng, createdBy: this.props.user }
+      const data = { ...this.state.data, long: this.props.new.lng, lat: this.props.new.lng}
       this.setState({data})
     }
     // axios.get('/api/records')
@@ -100,12 +100,15 @@ class Sidebar extends React.Component{
         })
       })
       .catch(() => this.setState({ error: 'Invalid credentials' }))
+      .then(this.setState({ data: {} }))
   }
 
   handleSoundSubmit(e) {
     e.preventDefault()
-
-    axios.post('/api/sounds', this.state.data)
+    const token = Auth.getToken()
+    console.log(Auth.getPayload())
+    axios.post('/api/sounds', this.state.data, {
+      headers: { 'Authorization': `Bearer ${token}`}} )
       .then(res => {
         Auth.setToken(res.data.token)
         Flash.setMessage('success', res.data.message)

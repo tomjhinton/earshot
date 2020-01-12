@@ -4,7 +4,8 @@ import axios from 'axios'
 import {Link} from 'react-router-dom'
 import Auth from '../../lib/Auth'
 import Flash from '../../lib/Flash'
-
+import PropTypes from 'prop-types'
+import { Spring, config, animated } from 'react-spring/renderprops'
 const sanitizeHtml = require('sanitize-html')
 
 

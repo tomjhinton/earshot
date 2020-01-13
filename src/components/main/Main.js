@@ -44,6 +44,22 @@ class Main extends React.Component{
 
   }
 
+  componentDidUpdate(prevProps){
+      if(this.props !== prevProps){
+    user = Auth.getPayload()
+    console.log(user)
+    if(user){
+      axios.get(`/api/users/${user.sub}`)
+        .then(res => this.setState({user: res.data}))
+        console.log(this.state)
+
+  }
+}
+
+
+  }
+
+
   sanitize(input){
     return sanitizeHtml(input, {
       allowedTags: [ 'p', 'em', 'strong', 'iframe' ],
